@@ -6,10 +6,16 @@ import java.sql.*;
 public class DataLoader {
 
     public void populate(int numberOfRecordsToInsert) {
-         QueryGenerator queryGenerator=new QueryGenerator(numberOfRecordsToInsert);
+
+        QueryGenerator queryGenerator = new QueryGenerator(numberOfRecordsToInsert);
+
+        Database database = new Database();
 
         try {
-            queryGenerator.generateInsertBatch(numberOfRecordsToInsert);
+            Statement batch = queryGenerator.generateInsertBatch(numberOfRecordsToInsert);
+
+            database.executeBatchQuery(batch);
+
         }
         catch (SQLException e) {
             e.printStackTrace();

@@ -24,6 +24,7 @@ public class CustomAsserts {
 
         String query_count = "select count(*) from customer;";
         try {
+
             check_count = executeSelect(query_count);
         }
         catch (SQLException e){

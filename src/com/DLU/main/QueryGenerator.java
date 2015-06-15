@@ -30,6 +30,8 @@ public class QueryGenerator {
 
             String query = generateInsertQuery(tablename);
             stmt.addBatch(query);
+
+            numberOfRecordsToInsert = numberOfRecordsToInsert - 1;
         }
 
         return stmt;
@@ -38,13 +40,11 @@ public class QueryGenerator {
 
     private String generateInsertQuery(String tablename) throws SQLException{
 
-        ArrayList<String> columnNames=new ArrayList<String>();
-
         ArrayList<String> columns = generateInsertQueryValues();
 
-        String colummnNamesString = StringUtils.join(columnNames, ',');
+        String columnNamesString = StringUtils.join(columns, ',');
 
-        return String.format("insert into %s values(%s)", tablename, columnNames);
+        return String.format("insert into %s values(%s)", tablename, columnNamesString);
 
 
     }
@@ -52,7 +52,7 @@ public class QueryGenerator {
     private ArrayList<String> generateInsertQueryValues() {
 
         SchemaGenerator schemagenerator =new SchemaGenerator();
-        Map<String, List<String>> schema= new LinkedHashMap<String, List<String>>();
+        Map<String, List<String>> schema;
         schema = schemagenerator.generateTheSchemaOfTheDatabaseTable();
 
         ArrayList<String> columns = new ArrayList<String>();
@@ -62,17 +62,16 @@ public class QueryGenerator {
 
         for(Map.Entry<String,List<String>> entry : schema.entrySet()){
 
-            List<String> valueList = new ArrayList<String>();
-            valueList = entry.getValue();
+            List<String> valueList = entry.getValue();
 
             if((valueList.get(0).compareTo("int"))==0 && valueList.get(1).compareTo("primary key")==0){
                 columns.add(randomValue);
             }
+            else if((valueList.get(0).compareTo("String"))==0 && valueList.get(1).compareTo("unique key")==0){
+                columns.add("\"" + randomValue + "@gmail.com\"");
+            }
             else if((valueList.get(0).compareTo("String"))==0 ){
                 columns.add("\"xyz\"");
-            }
-            else if((valueList.get(0).compareTo("String"))==0 && valueList.get(1).compareTo("unique key")==0){
-                columns.add(randomValue + "\"@gmail.com\"");
             }
 
 

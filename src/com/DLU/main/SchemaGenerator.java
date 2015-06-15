@@ -5,9 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by bindugo on 13/06/15.
- */
 public class SchemaGenerator {
 
    public Map<String,List<String>> generateTheSchemaOfTheDatabaseTable() {
@@ -20,6 +17,7 @@ public class SchemaGenerator {
        idList.add("int");
        idList.add("primary key");
        nameList.add("String");
+       nameList.add("Null");
        emailList.add("String");
        emailList.add("unique key");
 
