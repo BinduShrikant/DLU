@@ -17,14 +17,10 @@ public class QueryGeneratorTest {
       QueryGenerator querygenerator = new QueryGenerator(numberOfRecordsToInsert);
 
       Statement batch = querygenerator.generateInsertBatch(numberOfRecordsToInsert);
-      int countOfQueries= batch.getUpdateCount();
+      int countOfQueries= batch.getFetchSize();
         System.out.println(countOfQueries);
 
       assertEquals("It checks whether the required number of queries are batched", 1, countOfQueries);
   }
-
-
-
-
 
 }

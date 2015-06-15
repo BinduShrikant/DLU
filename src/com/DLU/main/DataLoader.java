@@ -5,17 +5,11 @@ import java.sql.*;
 //Populates the database
 public class DataLoader {
 
-    private final Database database;
-
-    public DataLoader() {
-        database = new Database();
-    }
-
-
     public void populate(int numberOfRecordsToInsert) {
+         QueryGenerator queryGenerator=new QueryGenerator(numberOfRecordsToInsert);
 
         try {
-            database.executeBatchQuery(numberOfRecordsToInsert);
+            queryGenerator.generateInsertBatch(numberOfRecordsToInsert);
         }
         catch (SQLException e) {
             e.printStackTrace();
