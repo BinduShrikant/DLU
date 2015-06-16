@@ -20,15 +20,15 @@ public class DatabaseTest {
         int load = 2;
         int countOfCurrentEntries = testEntries();
 
-        stmt.addBatch("insert into customer values(1,\"bindu\",\"bindu@gmail.com\"");
-        stmt.addBatch("insert into customer values(2,\"bindu\",\"bindu1@gmail.com\"");
+        stmt.addBatch("insert into customer values(1,\"bindu\",\"bindu@gmail.com\")");
+        stmt.addBatch("insert into customer values(2,\"bindu\",\"bindu1@gmail.com\")");
         database.executeBatchQuery(stmt);
 
         assertInsert(load, countOfCurrentEntries);
     }
 
 
-    @Test
+   @Test
     public void testExecuteBatchQueryDoesNotInsertAnyRecordsWhenThereIsAFailure() throws Exception {
 
         Database database = new Database();
@@ -39,7 +39,7 @@ public class DatabaseTest {
 
         int countOfCurrentEntries = testEntries();
 
-        stmt.addBatch("insert into customer values(@#$SW,\"bindu\",\"bindu@gmail.com\"");
+        stmt.addBatch("insert into customer values(@#$SW,\"bindu\",\"bindu@gmail.com\")");
         database.executeBatchQuery(stmt);
 
         assertInsert(0, countOfCurrentEntries);
