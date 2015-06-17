@@ -21,7 +21,7 @@ public class Database {
     }
 
 
-    public void executeBatchQuery(Statement batch) {
+    public void executeBatchQuery(Statement batch) throws SQLException{
 
         Connection dbCon = null;
 
@@ -31,23 +31,17 @@ public class Database {
 
               batch.executeBatch();
 
-              //dbCon.commit();
+              dbCon.commit();
               System.out.println("Insertion Committed");
 
         }
         catch (SQLException e) {
 
             e.printStackTrace();
-            try {
                 if (dbCon != null) {
                     dbCon.rollback();
 
                 }
-            }
-                catch(SQLException e1){
-                    e1.printStackTrace();
-                }
-
 
         }
     }

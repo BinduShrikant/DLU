@@ -20,6 +20,7 @@ public class QueryGenerator {
 
     }
 
+    //TODO : remove the unnecessary connection we have in query generator
     public Statement generateInsertBatch() throws SQLException{
 
         Database database=new Database();
@@ -27,7 +28,6 @@ public class QueryGenerator {
 
         Connection dbCon = null;
         dbCon=database.getConnection();
-        dbCon.setAutoCommit(false);
         Statement stmt=dbCon.createStatement();
 
         while(numberOfRecordsToInsert>0) {
