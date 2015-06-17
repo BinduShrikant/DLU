@@ -11,17 +11,21 @@ public class SchemaGenerator {
 
        Map<String, List<String>> schema = new LinkedHashMap<String, List<String>>();
        List<String> idList = new ArrayList<String>();
+       List<String> snoList = new ArrayList<String>();
        List<String> nameList = new ArrayList<String>();
        List<String> emailList = new ArrayList<String>();
 
        idList.add("int");
-       idList.add("primary key");
+       idList.add("composite primary key");
+       snoList.add("int");
+       snoList.add("composite primary key");
        nameList.add("String");
-       nameList.add("Null");
+       nameList.add("unique key");
        emailList.add("String");
        emailList.add("unique key");
 
        schema.put("id",idList);
+       schema.put("sno",snoList);
        schema.put("name",nameList);
        schema.put("email",emailList);
 

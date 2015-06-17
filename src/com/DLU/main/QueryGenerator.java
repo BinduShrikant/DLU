@@ -10,20 +10,24 @@ import java.util.*;
 public class QueryGenerator {
 
     private Random random;
+    private int numberOfRecordsToInsert;
 
-    QueryGenerator(int numberOfRecordsToInsert){
 
+    QueryGenerator(int load){
+
+        numberOfRecordsToInsert = load;
         random = new Random(numberOfRecordsToInsert);
 
     }
 
-    public Statement generateInsertBatch(int numberOfRecordsToInsert) throws SQLException{
+    public Statement generateInsertBatch() throws SQLException{
 
         Database database=new Database();
         String tablename="customer";
 
         Connection dbCon = null;
         dbCon=database.getConnection();
+        dbCon.setAutoCommit(false);
         Statement stmt=dbCon.createStatement();
 
         while(numberOfRecordsToInsert>0) {
@@ -57,7 +61,7 @@ public class QueryGenerator {
 
         ArrayList<String> columns = new ArrayList<String>();
 
-        String randomValue = String.valueOf(random.nextInt());
+        String randomValue = String.valueOf(random.nextInt(Integer.MAX_VALUE)+1);
 
 
         for(Map.Entry<String,List<String>> entry : schema.entrySet()){
@@ -67,13 +71,24 @@ public class QueryGenerator {
             if((valueList.get(0).compareTo("int"))==0 && valueList.get(1).compareTo("primary key")==0){
                 columns.add(randomValue);
             }
+            else if((valueList.get(0).compareTo("String"))==0 && valueList.get(1).compareTo("primary key")==0){
+                columns.add("\""+randomValue+"\"");
+            }
             else if((valueList.get(0).compareTo("String"))==0 && valueList.get(1).compareTo("unique key")==0){
                 columns.add("\"" + randomValue + "@gmail.com\"");
             }
-            else if((valueList.get(0).compareTo("String"))==0 ){
+            else if((valueList.get(0).compareTo("int"))==0 && valueList.get(1).compareTo("unique key")==0) {
+                columns.add(randomValue);
+            }
+            else if((valueList.get(0).compareTo("String"))==0 && valueList.get(1).compareTo("Null")==0){
                 columns.add("\"xyz\"");
             }
-
+            else if(valueList.get(0).compareTo("int")==0  && valueList.get(1).compareTo("composite primary key")==0){
+                columns.add(randomValue);
+            }
+            else if(valueList.get(0).compareTo("string")==0  && valueList.get(1).compareTo("composite primary key")==0){
+                columns.add("\"" + randomValue + "\"");
+            }
 
         }
         return columns;

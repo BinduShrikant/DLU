@@ -21,25 +21,33 @@ public class Database {
     }
 
 
-    public void executeBatchQuery(Statement batch) throws SQLException{
+    public void executeBatchQuery(Statement batch) {
 
         Connection dbCon = null;
 
         try {
               dbCon = getConnection();
               dbCon.setAutoCommit(false);
+
               batch.executeBatch();
 
-              dbCon.commit();
+              //dbCon.commit();
               System.out.println("Insertion Committed");
 
         }
         catch (SQLException e) {
-            e.printStackTrace();
 
-            if (dbCon != null) {
-                dbCon.rollback();
+            e.printStackTrace();
+            try {
+                if (dbCon != null) {
+                    dbCon.rollback();
+
+                }
             }
+                catch(SQLException e1){
+                    e1.printStackTrace();
+                }
+
 
         }
     }

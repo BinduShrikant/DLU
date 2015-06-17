@@ -16,7 +16,7 @@ public class QueryGeneratorTest {
       int numberOfRecordsToInsert = 1;
       QueryGenerator querygenerator = new QueryGenerator(numberOfRecordsToInsert);
 
-      Statement batch = querygenerator.generateInsertBatch(numberOfRecordsToInsert);
+      Statement batch = querygenerator.generateInsertBatch();
       int countOfQueries[] = batch.executeBatch();
 
       assertEquals("It checks whether the required number of queries are batched", 1, countOfQueries[0]);
