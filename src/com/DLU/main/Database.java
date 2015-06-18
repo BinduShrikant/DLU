@@ -8,11 +8,17 @@ public class Database {
     private String connectionString;
     private String username;
     private String password;
+    private static Database database = new Database( );
 
-    public Database() {
-        connectionString = "jdbc:mysql://localhost:3306/cust";
+    private Database() {
+        connectionString = "jdbc:mysql://localhost:3306/cust?"+"&rewriteBatchedStatements=true";
         username = "root";
         password = "";
+    }
+
+
+    public static Database getInstance( ) {
+        return database;
     }
 
 

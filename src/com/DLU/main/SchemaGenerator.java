@@ -14,6 +14,7 @@ public class SchemaGenerator {
        List<String> snoList = new ArrayList<String>();
        List<String> nameList = new ArrayList<String>();
        List<String> emailList = new ArrayList<String>();
+       List<String> ageList = new ArrayList<String>();
 
        idList.add("int");
        idList.add("composite primary key");
@@ -23,11 +24,14 @@ public class SchemaGenerator {
        nameList.add("unique key");
        emailList.add("String");
        emailList.add("unique key");
+       ageList.add("int");
+       ageList.add("Null");
 
        schema.put("id",idList);
        schema.put("sno",snoList);
        schema.put("name",nameList);
        schema.put("email",emailList);
+       schema.put("age",ageList);
 
        return schema;
    }

@@ -9,7 +9,7 @@ public class DataLoader {
 
         QueryGenerator queryGenerator = new QueryGenerator(numberOfRecordsToInsert);
 
-        Database database = new Database();
+        Database database = Database.getInstance();
 
         try {
             Statement batch = queryGenerator.generateInsertBatch();

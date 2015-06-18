@@ -11,7 +11,7 @@ public class DatabaseTest {
     @Test
     public void testExecuteBatchQuery() throws Exception {
 
-        Database database = new Database();
+        Database database =Database.getInstance();
         Connection dbCon = null;
 
         dbCon = database.getConnection();
@@ -21,8 +21,8 @@ public class DatabaseTest {
         int load = 2;
         int countOfCurrentEntries = testEntries();
 
-        stmt.addBatch("insert into customer values(1,1,\"bindu\",\"bindu@gmail.com\")");
-        stmt.addBatch("insert into customer values(2,2,\"bindu1\",\"bindu1@gmail.com\")");
+        stmt.addBatch("insert into customer values(1,1,\"bindu\",\"bindu@gmail.com\",999)");
+        stmt.addBatch("insert into customer values(2,2,\"bindu1\",\"bindu1@gmail.com\",999)");
         database.executeBatchQuery(stmt);
 
         assertInsert(load, countOfCurrentEntries);
@@ -32,16 +32,16 @@ public class DatabaseTest {
     @Test
     public void testExecuteBatchQueryDoesNotInsertAnyRecordsWhenThereIsAFailure() throws Exception {
 
-        Database database = new Database();
+        Database database = Database.getInstance();
         Connection dbCon = null;
 
         dbCon = database.getConnection();
-        dbCon.setAutoCommit(false);
+        //dbCon.setAutoCommit(false);
         Statement stmt = dbCon.createStatement();
 
         int countOfCurrentEntries = testEntries();
-        stmt.addBatch("insert into customer values(12,12,\"bindu3\",\"bindu3@gmail.com\")");
-        stmt.addBatch("insert into customer values(1,@#,\"bindu\",\"bindu@gmail.com\")");
+        stmt.addBatch("insert into customer values(12,12,\"bindu3\",\"bindu3@gmail.com\",999)");
+        stmt.addBatch("insert into customer values(1,@#,\"bindu\",\"bindu@gmail.com\",999)");
         database.executeBatchQuery(stmt);
 
         assertInsert(0, countOfCurrentEntries);
