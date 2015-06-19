@@ -40,7 +40,8 @@ public class CustomAsserts {
         int record_count=0;
 
         ResultSet count_entries;
-        Connection dbCon = Database.getInstance().getConnection();
+        Database database = Database.getInstance();
+        Connection dbCon = database.getConnection();
 
         Statement stmt = dbCon.createStatement();
         count_entries = stmt.executeQuery(query);

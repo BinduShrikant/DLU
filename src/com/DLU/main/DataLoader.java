@@ -16,8 +16,7 @@ public class DataLoader {
 
             database.executeBatchQuery(batch);
 
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

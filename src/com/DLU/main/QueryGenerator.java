@@ -3,6 +3,7 @@ package com.DLU.main;
 import org.apache.commons.lang3.StringUtils;
 //import com.DLU.main.SchemaGenerator;
 import com.DLU.main.Database;
+
 import java.sql.*;
 import java.util.*;
 
@@ -67,10 +68,9 @@ public class QueryGenerator {
             List<String> valueList = entry.getValue();
 
             if (valueList.get(1).compareTo("primary key") == 0 || valueList.get(1).compareTo("composite primary key") == 0 || valueList.get(1).compareTo("unique key") == 0) {
-                randomValue = getValueForPrimaryCompositePrimaryAndUniqueKey(valueList.get(0),randomValue);
+                randomValue = getValueForPrimaryCompositePrimaryAndUniqueKey(valueList.get(0), randomValue);
                 columns.add(randomValue);
-            }
-            else if (valueList.get(1).compareTo("Null") == 0) {
+            } else if (valueList.get(1).compareTo("Null") == 0) {
                 randomValue = getValueForColumnsWithNoConstraint(valueList.get(0));
                 columns.add(randomValue);
             }
@@ -80,10 +80,9 @@ public class QueryGenerator {
     }
 
 
+    private String getValueForPrimaryCompositePrimaryAndUniqueKey(String datatype, String randomValue) {
 
-    private String getValueForPrimaryCompositePrimaryAndUniqueKey(String datatype,String randomValue) {
-
-        if (datatype.compareTo("int") == 0||datatype.compareTo("String") == 0) {
+        if (datatype.compareTo("int") == 0 || datatype.compareTo("String") == 0) {
             return randomValue;
         }
         return "Null";
@@ -94,15 +93,13 @@ public class QueryGenerator {
     private String getValueForColumnsWithNoConstraint(String datatype) {
 
         if (datatype.compareTo("String") == 0) {
-            return "\""+"xyz"+"\"";
-        }
-        else if(datatype.compareTo("int") == 0){
+            return "\"" + "xyz" + "\"";
+        } else if (datatype.compareTo("int") == 0) {
             return "999";
         }
         return "Null";
 
     }
-
 
 
 }
