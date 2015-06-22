@@ -10,14 +10,12 @@ import java.util.*;
 //Generates the query based on the request
 public class QueryGenerator {
 
-    private Random random;
     private int numberOfRecordsToInsert;
 
 
     QueryGenerator(int load) {
 
         numberOfRecordsToInsert = load;
-        random = new Random();
 
     }
 
@@ -62,45 +60,30 @@ public class QueryGenerator {
 
         ArrayList<String> columns = new ArrayList<String>();
 
-        String randomValue = String.valueOf(random.nextInt(Integer.MAX_VALUE) + 1);
+
+        long randomValue = System.nanoTime();
+        randomValue = randomValue/1000;
+        randomValue = randomValue%1000000000;
+
+
         for (Map.Entry<String, List<String>> entry : schema.entrySet()) {
 
             List<String> valueList = entry.getValue();
 
-            if (valueList.get(1).compareTo("primary key") == 0 || valueList.get(1).compareTo("composite primary key") == 0 || valueList.get(1).compareTo("unique key") == 0) {
-                randomValue = getValueForPrimaryCompositePrimaryAndUniqueKey(valueList.get(0), randomValue);
-                columns.add(randomValue);
+            if (valueList.get(1).compareTo("primary key") == 0
+                    || valueList.get(1).compareTo("composite primary key") == 0
+                    || valueList.get(1).compareTo("unique key") == 0) {
+
+                columns.add(String.valueOf(randomValue));
+
             } else if (valueList.get(1).compareTo("Null") == 0) {
-                randomValue = getValueForColumnsWithNoConstraint(valueList.get(0));
-                columns.add(randomValue);
+
+                columns.add(String.valueOf(randomValue));
             }
         }
         return columns;
 
     }
-
-
-    private String getValueForPrimaryCompositePrimaryAndUniqueKey(String datatype, String randomValue) {
-
-        if (datatype.compareTo("int") == 0 || datatype.compareTo("String") == 0) {
-            return randomValue;
-        }
-        return "Null";
-
-    }
-
-
-    private String getValueForColumnsWithNoConstraint(String datatype) {
-
-        if (datatype.compareTo("String") == 0) {
-            return "\"" + "xyz" + "\"";
-        } else if (datatype.compareTo("int") == 0) {
-            return "999";
-        }
-        return "Null";
-
-    }
-
 
 }
 

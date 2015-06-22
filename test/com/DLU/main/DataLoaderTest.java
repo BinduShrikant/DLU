@@ -10,7 +10,7 @@ public class DataLoaderTest {
     public void testThatADataLoaderPopulatesTheRequestedDataVolume() {
 
         DataLoader dataLoader = new DataLoader();
-        int load = 10;
+        int load = 10000;
 
         int countOfCurrentEntries = testEntries();
 
