@@ -1,8 +1,6 @@
 package com.DLU.main;
 
 import org.apache.commons.lang3.StringUtils;
-//import com.DLU.main.SchemaGenerator;
-import com.DLU.main.Database;
 
 import java.sql.*;
 import java.util.*;
