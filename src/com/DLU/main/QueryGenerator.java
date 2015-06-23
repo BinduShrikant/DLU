@@ -83,6 +83,15 @@ public class QueryGenerator {
 
     }
 
+    public ArrayList<String> generateInsertBatch(Schema customerSchema) {
+        ArrayList<String> rowsToInsert = new ArrayList<String>();
+
+        for(int i=0; i< numberOfRecordsToInsert; i++){
+            rowsToInsert.add(customerSchema.getRowToInsert());
+        }
+
+        return rowsToInsert;
+    }
 }
 
 
