@@ -1,37 +1,43 @@
 package com.DLU.main;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 public class SchemaGenerator {
 
-    public Map<String, List<String>> generateTheSchemaOfTheDatabaseTable() {
+    public ArrayList<Schema> generateTheSchemaOfTheDatabaseTable() {
 
-        Map<String, List<String>> schema = new LinkedHashMap<String, List<String>>();
-        List<String> idList = new ArrayList<String>();
-        List<String> snoList = new ArrayList<String>();
-        List<String> nameList = new ArrayList<String>();
-        List<String> emailList = new ArrayList<String>();
-        List<String> ageList = new ArrayList<String>();
+        ArrayList<Schema> schema =new ArrayList<Schema>();
 
-        idList.add("int");
-        idList.add("composite primary key");
-        snoList.add("int");
-        snoList.add("composite primary key");
-        nameList.add("String");
-        nameList.add("unique key");
-        emailList.add("String");
-        emailList.add("unique key");
-        ageList.add("int");
-        ageList.add("Null");
+        Schema currentSchema = new Schema();
 
-        schema.put("id", idList);
-        schema.put("sno", snoList);
-        schema.put("name", nameList);
-        schema.put("email", emailList);
-        schema.put("age", ageList);
+        currentSchema.ColumnName = "id";
+        currentSchema.Datatype = "int";
+        currentSchema.constraints.add(Schema.Constraints.compositeprimarykey);
+
+        schema.add(new Schema("id", "int", new ArrayList<Schema.Constraints>()));
+
+        currentSchema.ColumnName = "sno";
+        currentSchema.Datatype = "int";
+        currentSchema.constraints.add(Schema.Constraints.compositeprimarykey);
+
+        schema.add(currentSchema);
+
+        currentSchema.ColumnName = "name";
+        currentSchema.Datatype = "string";
+        currentSchema.constraints.add(Schema.Constraints.uniquekey);
+
+        schema.add(currentSchema);
+
+        currentSchema.ColumnName = "email";
+        currentSchema.Datatype = "string";
+        currentSchema.constraints.add(Schema.Constraints.uniquekey);
+
+        schema.add(currentSchema);
+
+        currentSchema.ColumnName = "age";
+        currentSchema.Datatype = "int";
+
+        schema.add(currentSchema);
 
         return schema;
     }
