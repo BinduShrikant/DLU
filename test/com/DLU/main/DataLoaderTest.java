@@ -4,7 +4,7 @@ package com.DLU.main;
 import org.junit.Test;
 import static com.DLU.main.CustomAsserts.*;
 
-//Testa the DataLoader class
+//Test the DataLoader class
 public class DataLoaderTest {
 
     @Test

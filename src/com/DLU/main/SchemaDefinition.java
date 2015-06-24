@@ -3,7 +3,6 @@ package com.DLU.main;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SchemaDefinition {
 
@@ -24,7 +23,6 @@ public class SchemaDefinition {
     private ArrayList<Integer> generateInsertQueryValues() {
 
         ArrayList<Integer> columnValues = new ArrayList<Integer>();
-
 
         for(Column column:columns){
 
