@@ -9,15 +9,7 @@ public class SchemaDefinition {
 
         String tableName = "customer";
         ArrayList<Column> columns = new ArrayList<Column>();
-/*
-        ArrayList<List<Constraints>> constraints;
 
-    public enum Constraints {
-        primarykey,
-        compositeprimarykey,
-        uniquekey
-    }
-*/
 
     public String getRowToInsert() {
 
@@ -32,13 +24,13 @@ public class SchemaDefinition {
     private ArrayList<Integer> generateInsertQueryValues() {
 
         ArrayList<Integer> columnValues = new ArrayList<Integer>();
-       // Schema Schemaobj=new Schema();
-        SchemaDefinition schema=new Schema().getSchema();
 
-        for(Column column:schema.columns){
+
+        for(Column column:columns){
 
             int columnValue = column.getValue();
             columnValues.add(columnValue);
+
         }
 
         return columnValues;

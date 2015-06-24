@@ -17,10 +17,4 @@ public class Column {
     }
 
 
-    private String getValue(String seed) {
-        String ColumnValue;
-
-return null;
-    }
-
 }

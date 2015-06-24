@@ -13,7 +13,9 @@ public class DataLoader {
 
         try {
 
-            Statement batch = queryGenerator.generateInsertBatch();
+            Schema schema=new Schema();
+
+            Statement batch = queryGenerator.generateInsertBatch(schema);
 
             database.executeBatchQuery(batch);
 

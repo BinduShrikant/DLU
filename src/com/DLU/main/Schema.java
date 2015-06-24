@@ -3,35 +3,32 @@ package com.DLU.main;
 
 import java.util.ArrayList;
 
-public class Schema {
+public class Schema extends SchemaDefinition {
 
     ArrayList<String> queryList = new ArrayList<String>();
-    SchemaDefinition schema =new SchemaDefinition();
-    Column column=new Column();
 
+    Column column = new Column();
 
-   public SchemaDefinition getSchema(){
+    Schema() {
 
-       schema.tableName="customer";
-       column.ColumnName="id";
-       column.Datatype="int";
-       (schema.columns).add(column);
-       column.ColumnName="name";
-       column.Datatype="String";
-       (schema.columns).add(column);
+        this.tableName = "customer";
+        column.ColumnName = "id";
+        column.Datatype = "int";
+        (this.columns).add(column);
+        column.ColumnName = "name";
+        column.Datatype = "String";
+        (this.columns).add(column);
 
+    }
 
-       return schema;
-   }
-
-    public ArrayList<String> getRowsToInsert(int numberOfRecordsToInsert){
+    public ArrayList<String> getRowsToInsert(int numberOfRecordsToInsert) {
 
         String query;
 
-        while(numberOfRecordsToInsert>0){
-            System.out.println(schema);
-             query =schema.getRowToInsert();
-             queryList.add(query);
+        while (numberOfRecordsToInsert > 0) {
+
+            query = getRowToInsert();
+            queryList.add(query);
 
             numberOfRecordsToInsert = numberOfRecordsToInsert - 1;
 

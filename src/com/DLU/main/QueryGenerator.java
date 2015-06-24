@@ -15,15 +15,15 @@ public class QueryGenerator {
         numberOfRecordsToInsert = load;
     }
 
-    public Statement generateInsertBatch() throws SQLException {
+    public Statement generateInsertBatch(Schema schema) throws SQLException {
 
         Database database = Database.getInstance();
-        Schema schema=new Schema();
+
+
 
         Connection dbCon = null;
         dbCon = database.getConnection();
         Statement stmt = dbCon.createStatement();
-        System.out.println(schema);
 
         ArrayList<String> queryList = schema.getRowsToInsert(numberOfRecordsToInsert);
 
