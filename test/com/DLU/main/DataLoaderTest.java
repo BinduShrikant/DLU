@@ -1,5 +1,6 @@
 package com.DLU.main;
 
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import org.junit.Test;
 import static com.DLU.main.CustomAsserts.*;
 
@@ -10,7 +11,7 @@ public class DataLoaderTest {
     public void testThatADataLoaderPopulatesTheRequestedDataVolume() {
 
         DataLoader dataLoader = new DataLoader();
-        int load = 10000;
+        int load = 10;
 
         int countOfCurrentEntries = testEntries();
 

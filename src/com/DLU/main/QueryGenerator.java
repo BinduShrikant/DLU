@@ -1,12 +1,11 @@
 package com.DLU.main;
 
 import org.apache.commons.lang3.StringUtils;
-//import com.DLU.main.SchemaGenerator;
 
 import java.sql.*;
 import java.util.*;
 
-//Generates the query based on the request
+//Generates the batch of query
 public class QueryGenerator {
 
     private int numberOfRecordsToInsert;
@@ -16,76 +15,72 @@ public class QueryGenerator {
         numberOfRecordsToInsert = load;
     }
 
-    //TODO : remove the unnecessary connection we have in query generator
     public Statement generateInsertBatch() throws SQLException {
 
         Database database = Database.getInstance();
-        String tablename = "customer";
+        Schema schema=new Schema();
 
         Connection dbCon = null;
         dbCon = database.getConnection();
         Statement stmt = dbCon.createStatement();
+        System.out.println(schema);
 
-        while (numberOfRecordsToInsert > 0) {
+        ArrayList<String> queryList = schema.getRowsToInsert(numberOfRecordsToInsert);
 
-            String query = generateInsertQuery(tablename);
-            stmt.addBatch(query);
-
-            numberOfRecordsToInsert = numberOfRecordsToInsert - 1;
-        }
+            for(String query : queryList) {
+                 stmt.addBatch(query);
+            }
 
         return stmt;
     }
 
 
-    private String generateInsertQuery(String tablename) throws SQLException {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*private String generateInsertQuery() throws SQLException {
 
         ArrayList<String> columns = generateInsertQueryValues();
 
         String columnNamesString = StringUtils.join(columns, ',');
 
-        return String.format("insert into %s values(%s)", tablename, columnNamesString);
+        return String.format("insert into %s values(%s)", columnNamesString);
 
 
     }
 
     private ArrayList<String> generateInsertQueryValues() {
 
-        SchemaGenerator schemagenerator = new SchemaGenerator();
-        Schema schema = schemagenerator.generateTheSchemaOfTheDatabaseTable();
+        Schema schemagenerator = new Schema();
+        SchemaDefinition schema = schemagenerator.generateTheSchemaOfTheDatabaseTable();
 
         ArrayList<String> columns = new ArrayList<String>();
 
-        long randomValue = new CustomRandom().getRandomValue();
+        for(Column column: schema){
 
-        for(Schema column: schema){
-            String columnValue = column.getValue();
+            String columnValue = Column.getValue();
+            columns.add(columnValue);
+
         }
-        for (int i = 0; i < schema.size(); i++) {
 
-            Schema column = schema.get(i);
+        return columns;
 
-
-// 1. type -> constraint -> value
-// 2. type -> no constraint -> value
-
-           /* if (valueList.get(1).compareTo("primary key") == 0
-                    || valueList.get(1).compareTo("composite primary key") == 0
-                    || valueList.get(1).compareTo("unique key") == 0) {
-
-                columns.add(String.valueOf(randomValue));
-
-            } else if (valueList.get(1).compareTo("Null") == 0) {
-
-                columns.add(String.valueOf(randomValue));
-            }
         }*/
-            return columns;
-
-        }
 
     }
-}
+
 
 
 

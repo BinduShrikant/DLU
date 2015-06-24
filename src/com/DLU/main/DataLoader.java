@@ -12,6 +12,7 @@ public class DataLoader {
         Database database = Database.getInstance();
 
         try {
+
             Statement batch = queryGenerator.generateInsertBatch();
 
             database.executeBatchQuery(batch);
