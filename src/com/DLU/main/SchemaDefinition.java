@@ -6,8 +6,17 @@ import java.util.ArrayList;
 
 public class SchemaDefinition {
 
-        String tableName = "customer";
-        ArrayList<Column> columns = new ArrayList<Column>();
+
+    private String tableName;
+    private ArrayList<Column> columns = new ArrayList<Column>();
+
+
+    public SchemaDefinition(String tableName, ArrayList<Column> columnInputs) {
+
+        this.tableName = tableName;
+        this.columns = columnInputs;
+
+    }
 
 
     public String getRowToInsert() {

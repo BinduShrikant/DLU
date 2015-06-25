@@ -10,7 +10,6 @@ public class QueryGenerator {
 
     private int numberOfRecordsToInsert;
 
-
     QueryGenerator(int load) {
         numberOfRecordsToInsert = load;
     }
@@ -18,8 +17,6 @@ public class QueryGenerator {
     public Statement generateInsertBatch(Schema schema) throws SQLException {
 
         Database database = Database.getInstance();
-
-
 
         Connection dbCon = null;
         dbCon = database.getConnection();

@@ -7,6 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class QueryGeneratorTest {
 
@@ -16,7 +17,18 @@ public class QueryGeneratorTest {
       int numberOfRecordsToInsert = 1;
       QueryGenerator querygenerator = new QueryGenerator(numberOfRecordsToInsert);
 
-        Schema schema=new Schema();
+        String tableName = "customer";
+        ArrayList<Column> columnInputs = new ArrayList<Column>();
+        Column column = new Column();
+
+        column.ColumnName = "id";
+        column.Datatype = "int";
+        columnInputs.add(column);
+        column.ColumnName = "name";
+        column.Datatype = "String";
+        columnInputs.add(column);
+
+        Schema schema=new Schema(tableName, columnInputs);
 
       Statement batch = querygenerator.generateInsertBatch(schema);
       int countOfQueries[] = batch.executeBatch();

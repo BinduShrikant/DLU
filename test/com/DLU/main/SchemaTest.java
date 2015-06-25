@@ -11,7 +11,18 @@ public class SchemaTest{
     @Test
     public void testGetRowsToInsert() {
 
-        Schema schema = new Schema();
+        String tableName = "customer";
+        ArrayList<Column> columnInputs = new ArrayList<Column>();
+        Column column = new Column();
+
+        column.ColumnName = "id";
+        column.Datatype = "int";
+        columnInputs.add(column);
+        column.ColumnName = "name";
+        column.Datatype = "String";
+        columnInputs.add(column);
+
+        Schema schema = new Schema(tableName, columnInputs);
 
         ArrayList<String> queryList = schema.getRowsToInsert(5);
 

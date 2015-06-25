@@ -3,14 +3,21 @@ package com.DLU.main;
 
 public class Column {
 
-    public String ColumnName;
-    public String Datatype;
+    private String ColumnName;
+    private String DataType;
+
+    Column(String ColumnName, String DataType){
+
+        this.ColumnName = ColumnName;
+        this.DataType =DataType;
+
+    }
 
     public int getValue(){
 
-        if(this.Datatype=="int")
+        if(this.DataType=="int")
             return 999;
-        else if(this.Datatype=="string");
+        else if(this.DataType=="string");
             return 999;
 
 
