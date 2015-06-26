@@ -3,17 +3,14 @@ package com.DLU.main;
 
 import java.util.ArrayList;
 
-//generate insert list of queries
 public class Schema{
 
 
     private SchemaDefinition schemaDefinition;
 
-    Schema(String tableName, ArrayList<Column> columnInputs) {
+    Schema(SchemaDefinition schemadefinition) {
 
-        //constructor to schemadefinition can be called here to remove inheritance
-        schemaDefinition = new SchemaDefinition(tableName,columnInputs);
-
+        schemaDefinition = schemadefinition;
     }
 
     public ArrayList<String> getRowsToInsert(int numberOfRecordsToInsert) {
@@ -32,5 +29,7 @@ public class Schema{
 
         return queryList;
     }
+
+
 
 }

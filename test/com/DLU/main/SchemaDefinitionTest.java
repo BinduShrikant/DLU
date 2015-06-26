@@ -13,22 +13,32 @@ public class SchemaDefinitionTest{
     @Test
     public void testGetRowToInsert(){
 
-        String tableName = "customer";
-        ArrayList<Column> columnInputs = new ArrayList<Column>();
-        Column column = new Column();
+        String name = "customer";
+        SchemaDefinition schemaDefinition;
+        ArrayList<Column> columns = new ArrayList<Column>();
+        ArrayList<Constraint> listOfConstraints = new ArrayList<Constraint>();
 
-        column.ColumnName = "id";
-        column.Datatype = "int";
-        columnInputs.add(column);
-        column.ColumnName = "name";
-        column.Datatype = "String";
-        columnInputs.add(column);
+        Column idColumn = new Column("id","int");
+        columns.add(idColumn);
+
+        Column nameColumn = new Column("name","String");
+        columns.add(nameColumn);
+
+        ArrayList<Column> primarykeycolumn= new ArrayList<Column>();
+        primarykeycolumn.add(idColumn);
+        Constraint primarykeyconstraint=new Constraint(Constraints.primarykey,primarykeycolumn);
+        listOfConstraints.add(primarykeyconstraint);
+
+        ArrayList<Column> uniquekeycolumn= new ArrayList<Column>();
+        uniquekeycolumn.add(nameColumn);
+        Constraint uniquekeyconstraint=new Constraint(Constraints.uniquekey,uniquekeycolumn);
+        listOfConstraints.add(uniquekeyconstraint);
+
+        schemaDefinition=new SchemaDefinition(name,columns,listOfConstraints);
 
         String pattern = "insert into .* values(.*,.*)";
 
         Pattern insertQueryPattern = Pattern.compile(pattern);
-
-        SchemaDefinition schemaDefinition = new SchemaDefinition(tableName, columnInputs);
 
         String query = schemaDefinition.getRowToInsert();
 

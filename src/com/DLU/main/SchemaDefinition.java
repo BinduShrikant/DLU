@@ -9,12 +9,14 @@ public class SchemaDefinition {
 
     private String tableName;
     private ArrayList<Column> columns = new ArrayList<Column>();
+    private Constraint constraint;
 
 
-    public SchemaDefinition(String tableName, ArrayList<Column> columnInputs) {
+    public SchemaDefinition(String tableName, ArrayList<Column> columnInputs,ArrayList<Constraint> listOfConstraints) {
 
         this.tableName = tableName;
         this.columns = columnInputs;
+        constraint = new Constraint(listOfConstraints);
 
     }
 
@@ -43,5 +45,6 @@ public class SchemaDefinition {
         return columnValues;
 
     }
+
 }
 

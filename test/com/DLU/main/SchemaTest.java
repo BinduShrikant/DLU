@@ -11,18 +11,30 @@ public class SchemaTest{
     @Test
     public void testGetRowsToInsert() {
 
-        String tableName = "customer";
-        ArrayList<Column> columnInputs = new ArrayList<Column>();
-        Column column = new Column();
+        String name = "customer";
+        SchemaDefinition schemaDefinition;
+        ArrayList<Column> columns = new ArrayList<Column>();
+        ArrayList<Constraint> listOfConstraints = new ArrayList<Constraint>();
 
-        column.ColumnName = "id";
-        column.Datatype = "int";
-        columnInputs.add(column);
-        column.ColumnName = "name";
-        column.Datatype = "String";
-        columnInputs.add(column);
+        Column idColumn = new Column("id","int");
+        columns.add(idColumn);
 
-        Schema schema = new Schema(tableName, columnInputs);
+        Column nameColumn = new Column("name","String");
+        columns.add(nameColumn);
+
+        ArrayList<Column> primarykeycolumn= new ArrayList<Column>();
+        primarykeycolumn.add(idColumn);
+        Constraint primarykeyconstraint=new Constraint(Constraints.primarykey,primarykeycolumn);
+        listOfConstraints.add(primarykeyconstraint);
+
+        ArrayList<Column> uniquekeycolumn= new ArrayList<Column>();
+        uniquekeycolumn.add(nameColumn);
+        Constraint uniquekeyconstraint=new Constraint(Constraints.uniquekey,uniquekeycolumn);
+        listOfConstraints.add(uniquekeyconstraint);
+
+        schemaDefinition=new SchemaDefinition(name,columns,listOfConstraints);
+
+        Schema schema=new Schema(schemaDefinition);
 
         ArrayList<String> queryList = schema.getRowsToInsert(5);
 
