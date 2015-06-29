@@ -20,7 +20,7 @@ public class QueryGeneratorTest {
         String name = "customer";
       SchemaDefinition schemaDefinition;
         ArrayList<Column> columns = new ArrayList<Column>();
-      ArrayList<Constraint> listOfConstraints = new ArrayList<Constraint>();
+      ArrayList<Constraint> constraints = new ArrayList<Constraint>();
 
 
       Column idColumn = new Column("id","int");
@@ -32,14 +32,14 @@ public class QueryGeneratorTest {
       ArrayList<Column> primarykeycolumn= new ArrayList<Column>();
       primarykeycolumn.add(idColumn);
       Constraint primarykeyconstraint=new Constraint(Constraints.primarykey,primarykeycolumn);
-      listOfConstraints.add(primarykeyconstraint);
+      constraints.add(primarykeyconstraint);
 
       ArrayList<Column> uniquekeycolumn= new ArrayList<Column>();
       uniquekeycolumn.add(nameColumn);
       Constraint uniquekeyconstraint=new Constraint(Constraints.uniquekey,uniquekeycolumn);
-      listOfConstraints.add(uniquekeyconstraint);
+      constraints.add(uniquekeyconstraint);
 
-      schemaDefinition=new SchemaDefinition(name,columns,listOfConstraints);
+      schemaDefinition=new SchemaDefinition(name,columns,constraints);
 
       Schema schema=new Schema(schemaDefinition);
 

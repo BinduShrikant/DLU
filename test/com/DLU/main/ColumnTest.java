@@ -1,4 +1,4 @@
-/*package com.DLU.main;
+package com.DLU.main;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -6,15 +6,18 @@ import static org.junit.Assert.*;
 public class ColumnTest {
 
     @Test
-    public void testsTheGetValueWithoutTheConstraintReturnsTheAppropriateValue(){
+    public void testsTheGetValueWithoutTheConstraintReturnsTheAppropriateValue() {
 
-        Column column=new Column();
-        column.ColumnName="id";
-        column.Datatype="int";
-        assertEquals("This test verifies that all the values are present.",999,column.getValue());
+        Column column = new Column("id", "int");
+
+        assertEquals("This test verifies that all the values are present.", 999, column.getValue());
 
 
     }
 
+    @Test
+    public void testsTheGetValueWithTheConstraintReturnsTheAppropriateValue() {
+
+
+    }
 }
-*/

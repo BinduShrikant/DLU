@@ -9,7 +9,7 @@ public class Column {
     Column(String ColumnName, String DataType){
 
         this.ColumnName = ColumnName;
-        this.DataType =DataType;
+        this.DataType = DataType;
 
     }
 
@@ -23,5 +23,12 @@ public class Column {
 
     }
 
+
+    public int getValue(int seed) {
+        if(this.DataType=="int")
+            return (seed+1);
+        else if(this.DataType=="string");
+            return (seed+1);
+    }
 
 }
