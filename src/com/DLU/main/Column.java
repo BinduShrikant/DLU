@@ -13,22 +13,22 @@ public class Column {
 
     }
 
-    public int getValue(){
+    public <T> T getValue(){
 
         if(this.DataType=="int")
-            return 999;
+            return (T) new Integer(999);
         else if(this.DataType=="string");
-            return 999;
+            return (T) new String("999");
 
 
     }
 
 
-    public int getValue(int seed) {
+    public <T> T getValue(int seed) {
         if(this.DataType=="int")
-            return (seed+1);
+            return (T) new Integer(seed+1);
         else if(this.DataType=="string");
-            return (seed+1);
+        return (T) new String(String.valueOf(seed+1));
     }
 
 }

@@ -11,7 +11,7 @@ public class SchemaDefinition {
     private ArrayList<Column> columns = new ArrayList<Column>();
     private ArrayList<Constraint> constraints;
     private boolean columnHasConstraint = false;
-    private static int row=0;
+    private static int rowCount =0;
 
 
     public SchemaDefinition(String tableName, ArrayList<Column> columnInputs,ArrayList<Constraint> constraints) {
@@ -26,7 +26,8 @@ public class SchemaDefinition {
 
     public String getRowToInsert() {
 
-        ArrayList<Integer> columnValues = generateInsertQueryValues();
+        ArrayList columnValues = generateInsertQueryValues();
+        rowCount++;
 
         String columnNamesString = StringUtils.join(columnValues, ',');
 
@@ -34,36 +35,27 @@ public class SchemaDefinition {
 
     }
 
-    private ArrayList<Integer> generateInsertQueryValues() {
+    private ArrayList generateInsertQueryValues() {
 
-        ArrayList<Integer> columnValues = new ArrayList<Integer>();
-
-        int columnValue;
-
-        row = row +1;
+        ArrayList columnValues = new ArrayList<Integer>();
 
         for(Column column:columns){
 
             columnHasConstraint = checkConstraint(column);
 
             if(columnHasConstraint){
-
-                columnValue = column.getValue(row);
-
+                columnValues.add(column.getValue(rowCount));
             }
+
             else{
-
-                columnValue = column.getValue();
-
+                columnValues.add(column.getValue());
             }
-
-            columnValues.add(columnValue);
 
         }
 
         return columnValues;
-
     }
+
 
     public boolean checkConstraint(Column column){
 
@@ -75,10 +67,7 @@ public class SchemaDefinition {
                     .contains(column) && constraint.constraint == Constraints.primarykey){return true;}
             if((constraint.columnsWithConstraint)
                     .contains(column) && constraint.constraint == Constraints.uniquekey){return true;}
-/*
-            columnHasConstraint = columnHasConstraint | (constraint.columnsWithConstraint)
-                    .contains(column);
-*/
+
         }
 
         return false;
