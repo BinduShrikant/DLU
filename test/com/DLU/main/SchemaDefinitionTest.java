@@ -10,6 +10,7 @@ import org.junit.Test;
 
 public class SchemaDefinitionTest{
 
+
     @Test
     public void testGetRowToInsert(){
 
@@ -21,18 +22,29 @@ public class SchemaDefinitionTest{
         Column idColumn = new Column("id","int");
         columns.add(idColumn);
 
-        Column nameColumn = new Column("name","String");
+        Column srColumn = new Column("srno","int");
+        columns.add(srColumn);
+
+        Column nameColumn = new Column("name","string");
         columns.add(nameColumn);
 
-        ArrayList<Column> primarykeycolumn= new ArrayList<Column>();
-        primarykeycolumn.add(idColumn);
-        Constraint primarykeyconstraint=new Constraint(Constraints.primarykey,primarykeycolumn);
-        listOfConstraints.add(primarykeyconstraint);
+        Column emailColumn = new Column("email","string");
+        columns.add(emailColumn);
 
-        ArrayList<Column> uniquekeycolumn= new ArrayList<Column>();
-        uniquekeycolumn.add(nameColumn);
-        Constraint uniquekeyconstraint=new Constraint(Constraints.uniquekey,uniquekeycolumn);
-        listOfConstraints.add(uniquekeyconstraint);
+        Column dateColumn = new Column("createdDate","date");
+        columns.add(dateColumn);
+
+        ArrayList<Column> primaryKeyColumn= new ArrayList<Column>();
+        primaryKeyColumn.add(idColumn);
+        Constraint primaryKeyConstraint=new Constraint(Constraints.primarykey,primaryKeyColumn);
+        listOfConstraints.add(primaryKeyConstraint);
+
+        ArrayList<Column> uniqueKeyColumn= new ArrayList<Column>();
+        uniqueKeyColumn.add(nameColumn);
+        uniqueKeyColumn.add(emailColumn);
+        Constraint uniqueKeyConstraint=new Constraint(Constraints.uniquekey,uniqueKeyColumn);
+        listOfConstraints.add(uniqueKeyConstraint);
+
 
         schemaDefinition=new SchemaDefinition(name,columns,listOfConstraints);
 
@@ -40,7 +52,7 @@ public class SchemaDefinitionTest{
 
         Pattern insertQueryPattern = Pattern.compile(pattern);
 
-        String query = schemaDefinition.getRowToInsert();
+        String query = schemaDefinition.getRowToInsert(999);
 
         Matcher insertQueryMatch = insertQueryPattern.matcher(query);
 

@@ -2,6 +2,8 @@ package com.DLU.main;
 
 import org.junit.Test;
 import java.sql.*;
+import java.util.ArrayList;
+
 import static com.DLU.main.CustomAsserts.*;
 
 
@@ -11,19 +13,14 @@ public class DatabaseTest {
     @Test
     public void testExecuteBatchQuery() throws Exception {
 
-        Database database =Database.getInstance();
-        Connection dbCon = null;
-
-        dbCon = database.getConnection();
-        Statement stmt = dbCon.createStatement();
-
-
         int load = 2;
         int countOfCurrentEntries = testEntries();
+        ArrayList<String> queryList=new ArrayList<String>();
+        Database database=Database.getInstance();
 
-        stmt.addBatch("insert into customer values(1,1,\"bindu\",\"bindu@gmail.com\",999)");
-        stmt.addBatch("insert into customer values(2,2,\"bindu1\",\"bindu1@gmail.com\",999)");
-        database.executeBatchQuery(stmt);
+        queryList.add("insert into customer values(111,111,\"bindu\",\"bindu@.com\",\"2015-2-2\")");
+        queryList.add("insert into customer values(222,222,\"bindu1\",\"bindu1@.com\",\"2015-2-2\")");
+        database.executeBatchQuery(queryList);
 
         assertInsert(load, countOfCurrentEntries);
     }
@@ -33,16 +30,12 @@ public class DatabaseTest {
     public void testExecuteBatchQueryDoesNotInsertAnyRecordsWhenThereIsAFailure() throws Exception {
 
         Database database = Database.getInstance();
-        Connection dbCon = null;
-
-        dbCon = database.getConnection();
-        //dbCon.setAutoCommit(false);
-        Statement stmt = dbCon.createStatement();
-
+        ArrayList<String> queryList=new ArrayList<String>();
         int countOfCurrentEntries = testEntries();
-        stmt.addBatch("insert into customer values(12,12,\"bindu3\",\"bindu3@gmail.com\",999)");
-        stmt.addBatch("insert into customer values(1,@#,\"bindu\",\"bindu@gmail.com\",999)");
-        database.executeBatchQuery(stmt);
+
+        queryList.add("insert into customer values(333,333,\"bindu3\",\"bindu3@.com\",\"2015-2-2\")");
+        queryList.add("insert into customer values(444,@#,\"bindu\",\"bindu@.com\",\"2015-2-2\")");
+        database.executeBatchQuery(queryList);
 
         assertInsert(0, countOfCurrentEntries);
     }

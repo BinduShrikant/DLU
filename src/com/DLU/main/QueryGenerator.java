@@ -14,25 +14,12 @@ public class QueryGenerator {
         numberOfRecordsToInsert = load;
     }
 
-    public Statement generateInsertBatch(Schema schema) throws SQLException {
+    public ArrayList<String> generateInsertQueries(Schema schema) throws SQLException {
 
-        Database database = Database.getInstance();
+        return schema.getRowsToInsert(numberOfRecordsToInsert);
 
-        Connection dbCon = null;
-        dbCon = database.getConnection();
-        Statement stmt = dbCon.createStatement();
-
-        ArrayList<String> queryList = schema.getRowsToInsert(numberOfRecordsToInsert);
-
-            for(String query : queryList) {
-                 stmt.addBatch(query);
-            }
-
-        return stmt;
     }
 
 }
-
-
 
 

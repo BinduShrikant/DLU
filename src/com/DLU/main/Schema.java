@@ -20,7 +20,7 @@ public class Schema{
 
         while (numberOfRecordsToInsert > 0) {
 
-            query = schemaDefinition.getRowToInsert();
+            query = schemaDefinition.getRowToInsert(queryList.size());
             queryList.add(query);
 
             numberOfRecordsToInsert = numberOfRecordsToInsert - 1;

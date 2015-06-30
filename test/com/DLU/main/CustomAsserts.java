@@ -16,11 +16,6 @@ public class CustomAsserts {
         assertEquals("This test verifies that all the values are present.", load, (testEntries() - countOfCurrentEntries));
     }
 
-   /* public static void assertQuery(String query){
-
-        assertEquals("It checks whether the the generated query is in proper format",query,);
-
-    }*/
 
     public static int testEntries() {
 

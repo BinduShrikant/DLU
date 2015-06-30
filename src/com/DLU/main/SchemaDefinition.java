@@ -11,23 +11,19 @@ public class SchemaDefinition {
     private ArrayList<Column> columns = new ArrayList<Column>();
     private ArrayList<Constraint> constraints;
     private boolean columnHasConstraint = false;
-    private static int rowCount =0;
 
 
-    public SchemaDefinition(String tableName, ArrayList<Column> columnInputs,ArrayList<Constraint> constraints) {
+    SchemaDefinition(String tableName, ArrayList<Column> columnInputs, ArrayList<Constraint> constraints) {
 
         this.tableName = tableName;
         this.columns = columnInputs;
-
         this.constraints = constraints;
 
     }
 
 
-    public String getRowToInsert() {
-
-        ArrayList columnValues = generateInsertQueryValues();
-        rowCount++;
+    public String getRowToInsert(int seed) {
+        ArrayList columnValues = generateInsertQueryValues(seed);
 
         String columnNamesString = StringUtils.join(columnValues, ',');
 
@@ -35,7 +31,7 @@ public class SchemaDefinition {
 
     }
 
-    private ArrayList generateInsertQueryValues() {
+    private ArrayList generateInsertQueryValues(int seed) {
 
         ArrayList columnValues = new ArrayList<Integer>();
 
@@ -44,7 +40,7 @@ public class SchemaDefinition {
             columnHasConstraint = checkConstraint(column);
 
             if(columnHasConstraint){
-                columnValues.add(column.getValue(rowCount));
+                columnValues.add(column.getValue(seed));
             }
 
             else{
@@ -57,7 +53,7 @@ public class SchemaDefinition {
     }
 
 
-    public boolean checkConstraint(Column column){
+    private boolean checkConstraint(Column column){
 
         for(Constraint constraint:constraints){
 

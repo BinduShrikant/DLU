@@ -26,28 +26,38 @@ public class QueryGeneratorTest {
       Column idColumn = new Column("id","int");
       columns.add(idColumn);
 
-      Column nameColumn = new Column("name","String");
+      Column srColumn = new Column("srno","int");
+      columns.add(srColumn);
+
+      Column nameColumn = new Column("name","string");
       columns.add(nameColumn);
 
-      ArrayList<Column> primarykeycolumn= new ArrayList<Column>();
-      primarykeycolumn.add(idColumn);
-      Constraint primarykeyconstraint=new Constraint(Constraints.primarykey,primarykeycolumn);
-      constraints.add(primarykeyconstraint);
+      Column emailColumn = new Column("email","string");
+      columns.add(emailColumn);
 
-      ArrayList<Column> uniquekeycolumn= new ArrayList<Column>();
-      uniquekeycolumn.add(nameColumn);
-      Constraint uniquekeyconstraint=new Constraint(Constraints.uniquekey,uniquekeycolumn);
-      constraints.add(uniquekeyconstraint);
+      Column dateColumn = new Column("createdDate","date");
+      columns.add(dateColumn);
+
+      ArrayList<Column> primaryKeyColumn= new ArrayList<Column>();
+      primaryKeyColumn.add(idColumn);
+      Constraint primaryKeyConstraint=new Constraint(Constraints.primarykey,primaryKeyColumn);
+      constraints.add(primaryKeyConstraint);
+
+      ArrayList<Column> uniqueKeyColumn= new ArrayList<Column>();
+      uniqueKeyColumn.add(nameColumn);
+      uniqueKeyColumn.add(emailColumn);
+      Constraint uniqueKeyConstraint=new Constraint(Constraints.uniquekey,uniqueKeyColumn);
+      constraints.add(uniqueKeyConstraint);
+
 
       schemaDefinition=new SchemaDefinition(name,columns,constraints);
 
       Schema schema=new Schema(schemaDefinition);
 
 
-      Statement batch = querygenerator.generateInsertBatch(schema);
-      int countOfQueries[] = batch.executeBatch();
+      ArrayList<String> batch = querygenerator.generateInsertQueries(schema);
 
-      assertEquals("It checks whether the required number of queries are batched", 1, countOfQueries[0]);
+      assertEquals("It checks whether the required number of queries are batched", 1, batch.size());
   }
 
 }

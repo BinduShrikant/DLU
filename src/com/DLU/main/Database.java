@@ -1,6 +1,7 @@
 package com.DLU.main;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 //Executed the batch of SQL queries.
 public class Database {
@@ -33,13 +34,17 @@ public class Database {
     }
 
 
-    public void executeBatchQuery(Statement batch) throws SQLException {
+    public void executeBatchQuery(ArrayList<String> queryList) throws SQLException {
 
         Connection dbCon = null;
 
         try {
             dbCon = getConnection();
             dbCon.setAutoCommit(false);
+            Statement batch=dbCon.createStatement();
+            for(String query:queryList){
+                batch.addBatch(query);
+            }
 
             batch.executeBatch();
 
@@ -55,6 +60,17 @@ public class Database {
             }
 
         }
+    }
+
+    public void cleanDatabase(int numberOfRecordsToInsert) throws SQLException{
+
+        Connection dbCon=getConnection();
+        Statement stmt=dbCon.createStatement();
+        String query=String.format("delete from %s where 0<id<%s;","customer",numberOfRecordsToInsert);
+
+        stmt.executeUpdate(query);
+        dbCon.commit();
+        System.out.println("Database cleaned");
     }
 
 
