@@ -25,11 +25,9 @@ public class Column {
             return (T) new Integer(999);
         else if(this.DataType=="string")
             return (T) new String("999");
-        else if(this.DataType=="date")
+        else
             return (T) new String("\""+dateFormat.format(date)+"\"");
 
-
-        return null;
 
     }
 
@@ -42,10 +40,9 @@ public class Column {
             return (T) new Integer(seed+1);
         else if(this.DataType=="string")
             return (T) new String(String.valueOf(seed+1));
-        else if(this.DataType=="date")
+        else
             return (T) new String("\""+dateFormat.format(date)+"\"");
 
-        return null;
     }
 
 }

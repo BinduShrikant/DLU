@@ -6,29 +6,40 @@ import java.util.ArrayList;
 //Populates the database
 public class DataLoader {
 
-    public void populate(int numberOfRecordsToInsert) {
+    public int populate(int numberOfRecordsToInsert) {
 
         QueryGenerator queryGenerator = new QueryGenerator(numberOfRecordsToInsert);
         Database database = Database.getInstance();
 
         try {
 
-            SchemaDefinition schemaDefinition = generateSchemaDefinitionForCustomer();
+            if(numberOfRecordsToInsert<50001 && numberOfRecordsToInsert>0) {
 
-            Schema schema=new Schema(schemaDefinition);
+                SchemaDefinition schemaDefinition = generateSchemaDefinitionForCustomer();
 
-            ArrayList<String> insertQueries = queryGenerator.generateInsertQueries(schema);
+                Schema schema = new Schema(schemaDefinition);
 
-            database.executeBatchQuery(insertQueries);
+                ArrayList<String> insertQueries = queryGenerator.generateInsertQueries(schema);
 
-            //database.cleanDatabase(numberOfRecordsToInsert);
+                database.executeBatchQuery(insertQueries);
+
+                return 0;
+            }
+            else {
+
+                System.out.println("Limit [0-50000]");
+
+                return -1;
+
+            }
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
+        return numberOfRecordsToInsert;
     }
 
-    private SchemaDefinition generateSchemaDefinitionForCustomer() {
+    public SchemaDefinition generateSchemaDefinitionForCustomer() {
         ArrayList<Column> columns = new ArrayList<Column>();
         ArrayList<Constraint> constraints = new ArrayList<Constraint>();
 

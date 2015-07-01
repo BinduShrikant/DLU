@@ -5,6 +5,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+
 import static org.junit.Assert.*;
 
 //Custom assert methods for tests
@@ -30,6 +39,18 @@ public class CustomAsserts {
             return check_count;
         }
         return check_count;
+
+    }
+
+    public static void assertInsertQueryPattern(String query){
+
+        String pattern = "insert into .* values(.*)";
+
+        Pattern insertQueryPattern = Pattern.compile(pattern);
+
+        Matcher insertQueryMatch = insertQueryPattern.matcher(query);
+
+        assertEquals("This test assures that the insert query is in correct format",true,insertQueryMatch.find());
 
     }
 

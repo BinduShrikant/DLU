@@ -1,7 +1,9 @@
 package com.DLU.main;
 
-
+import static org.junit.Assert.*;
 import org.junit.Test;
+
+import org.junit.Assert.*;
 
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -27,9 +29,37 @@ public class DataLoaderTest {
 
         Database database=Database.getInstance();
         database.cleanDatabase(load);
+    }
+
+
+    @Test
+    public void testThatADataLoaderDoesNotPopulatesTheDataVolumeWhenLoadCrossesLimit() throws SQLException{
+
+        DataLoader dataLoader = new DataLoader();
+        int load = 50001;
+
+        int countOfCurrentEntries = testEntries();
+
+        assertEquals(-1,dataLoader.populate(load));
+
+        assertEquals(countOfCurrentEntries,testEntries());
 
     }
 
 
+    @Test
+    public void testThatADataLoaderDoesNotPopulatesTheDataVolumeWhenLoadIsNegative() throws SQLException{
+
+        DataLoader dataLoader = new DataLoader();
+        int load = -21;
+
+        int countOfCurrentEntries = testEntries();
+
+
+        assertEquals(-1,dataLoader.populate(load));
+
+        assertEquals(countOfCurrentEntries,testEntries());
+
+    }
 
 }

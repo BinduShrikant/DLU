@@ -1,10 +1,9 @@
 package com.DLU.main;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static org.junit.Assert.*;
+import static com.DLU.main.CustomAsserts.*;
 
 import org.junit.Test;
 
@@ -14,49 +13,65 @@ public class SchemaDefinitionTest{
     @Test
     public void testGetRowToInsert(){
 
-        String name = "customer";
-        SchemaDefinition schemaDefinition;
-        ArrayList<Column> columns = new ArrayList<Column>();
-        ArrayList<Constraint> listOfConstraints = new ArrayList<Constraint>();
 
-        Column idColumn = new Column("id","int");
-        columns.add(idColumn);
+        DataLoader dataLoader=new DataLoader();
 
-        Column srColumn = new Column("srno","int");
-        columns.add(srColumn);
-
-        Column nameColumn = new Column("name","string");
-        columns.add(nameColumn);
-
-        Column emailColumn = new Column("email","string");
-        columns.add(emailColumn);
-
-        Column dateColumn = new Column("createdDate","date");
-        columns.add(dateColumn);
-
-        ArrayList<Column> primaryKeyColumn= new ArrayList<Column>();
-        primaryKeyColumn.add(idColumn);
-        Constraint primaryKeyConstraint=new Constraint(Constraints.primarykey,primaryKeyColumn);
-        listOfConstraints.add(primaryKeyConstraint);
-
-        ArrayList<Column> uniqueKeyColumn= new ArrayList<Column>();
-        uniqueKeyColumn.add(nameColumn);
-        uniqueKeyColumn.add(emailColumn);
-        Constraint uniqueKeyConstraint=new Constraint(Constraints.uniquekey,uniqueKeyColumn);
-        listOfConstraints.add(uniqueKeyConstraint);
-
-
-        schemaDefinition=new SchemaDefinition(name,columns,listOfConstraints);
-
-        String pattern = "insert into .* values(.*,.*)";
-
-        Pattern insertQueryPattern = Pattern.compile(pattern);
-
+        SchemaDefinition schemaDefinition = dataLoader.generateSchemaDefinitionForCustomer();
         String query = schemaDefinition.getRowToInsert(999);
 
-        Matcher insertQueryMatch = insertQueryPattern.matcher(query);
+        assertInsertQueryPattern(query);
+    }
 
-        assertEquals("This test Checks if the generated Insery Query is in correct format",true,insertQueryMatch.find());
+    @Test
+    public void testsForPrimaryKeyConstraint(){
+
+        SchemaDefinition schemaDefinition = generateSchemaDefinitionForCustomer("customer","id","int",Constraints.primarykey);
+
+        String query=schemaDefinition.getRowToInsert(1);
+
+        assertInsertQueryPattern(query);
+    }
+
+
+    @Test
+    public void testsForCompositePrimaryKeyConstraint(){
+
+        SchemaDefinition schemaDefinition = generateSchemaDefinitionForCustomer("customer","id","int",Constraints.compositeprimarykey);
+
+        String query=schemaDefinition.getRowToInsert(1);
+
+        assertInsertQueryPattern(query);
+
+
+    }
+
+
+    @Test
+    public void testsForUniqueKeyConstraint(){
+
+        SchemaDefinition schemaDefinition = generateSchemaDefinitionForCustomer("customer","id","int",Constraints.uniquekey);
+
+        String query=schemaDefinition.getRowToInsert(1);
+
+        assertInsertQueryPattern(query);
+
+    }
+
+    public SchemaDefinition generateSchemaDefinitionForCustomer(String name,String columnName,String columnType,Constraints constraint) {
+
+        ArrayList<Column> columns = new ArrayList<Column>();
+        ArrayList<Constraint> constraints = new ArrayList<Constraint>();
+
+        Column column = new Column(columnName,columnType);
+        columns.add(column);
+
+
+        ArrayList<Column> constraintColumn= new ArrayList<Column>();
+        constraintColumn.add(column);
+        Constraint newConstraint=new Constraint(constraint,constraintColumn);
+        constraints.add(newConstraint);
+
+        return new SchemaDefinition(name,columns,constraints);
 
     }
 }
