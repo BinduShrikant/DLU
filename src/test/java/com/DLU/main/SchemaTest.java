@@ -12,7 +12,9 @@ public class SchemaTest{
     @Test
     public void testGetRowsToInsert() throws SQLException {
 
-
+//setup
+        //action
+        //assert
         DataLoader dataLoader=new DataLoader();
 
         SchemaDefinition schemaDefinition = dataLoader.generateSchemaDefinitionForCustomer();

@@ -71,6 +71,15 @@ public class SchemaDefinitionTest{
 
     public SchemaDefinition generateSchemaDefinitionForCustomer(String name,String columnName,String columnType,Constraints constraint) {
 
+       /* ArrayList<String> columnsWithPrimaryKeyConstraint = new ArrayList<String>();
+        columnsWithPrimaryKeyConstraint.add("id");
+        return new SchemDefinitionBuilder()
+                .WithSchemaName("Customer")
+                .WithColumn("id", "int")
+                .WithColumn("email", "string")
+                .WithConstraint(Constraints.primarykey, columnsWithPrimaryKeyConstraint)
+                .Build();*/
+
         ArrayList<Column> columns = new ArrayList<Column>();
         ArrayList<Constraint> constraints = new ArrayList<Constraint>();
 
