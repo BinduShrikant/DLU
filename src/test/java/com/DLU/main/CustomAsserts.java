@@ -1,18 +1,14 @@
 package com.DLU.main;
 
+import com.DLU.main.Database;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-
 
 import static org.junit.Assert.*;
 
@@ -42,9 +38,7 @@ public class CustomAsserts {
 
     }
 
-    public static void assertInsertQueryPattern(String query){
-
-        String pattern = "insert into .* values(.*)";
+    public static void assertQueryPattern(String pattern,String query){
 
         Pattern insertQueryPattern = Pattern.compile(pattern);
 

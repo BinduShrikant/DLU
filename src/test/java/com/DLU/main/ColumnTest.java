@@ -1,5 +1,7 @@
 package com.DLU.main;
 
+import com.DLU.main.Column;
+import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -14,7 +16,7 @@ public class ColumnTest {
 
         Column column = new Column("id", "int");
 
-        assertEquals("This test verifies that the value is generated properly when there is no constraint for an integer.", 999, column.getValue());
+        Assert.assertEquals("This test verifies that the value is generated properly when there is no constraint for an integer.", 999, column.getValue());
 
 
     }
@@ -23,7 +25,7 @@ public class ColumnTest {
     public void testsTheGetValueWithoutTheConstraintReturnsTheAppropriateValueForAString() {
 
         Column column=new Column("name","string");
-        assertEquals("This test verifies that the value is generated properly when there is no constraint for String.","999",column.getValue());
+        Assert.assertEquals("This test verifies that the value is generated properly when there is no constraint for String.", "999", column.getValue());
 
     }
 
@@ -36,8 +38,8 @@ public class ColumnTest {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date=new Date();
 
-        assertEquals("This test verifies that the value is generated properly when there is no constraint for Date.","\""+dateFormat.format(date)+"\""
-                ,column.getValue());
+        Assert.assertEquals("This test verifies that the value is generated properly when there is no constraint for Date.", "\"" + dateFormat.format(date) + "\""
+                , column.getValue());
 
     }
 
@@ -46,7 +48,7 @@ public class ColumnTest {
 
         Column column=new Column("id","int");
         int seed=999;
-        assertEquals("This test verifies that the value is generated properly when there is no constraint for integer.",1000,column.getValue(seed));
+        Assert.assertEquals("This test verifies that the value is generated properly when there is no constraint for integer.", 1000, column.getValue(seed));
 
     }
 
@@ -55,7 +57,7 @@ public class ColumnTest {
 
         Column column=new Column("name","string");
         int seed=999;
-        assertEquals("This test verifies that the value is generated properly when there is no constraint for String.","1000",column.getValue(seed));
+        Assert.assertEquals("This test verifies that the value is generated properly when there is no constraint for String.", "1000", column.getValue(seed));
 
 
     }
@@ -69,7 +71,7 @@ public class ColumnTest {
         Date date=new Date();
         int seed = 999;
 
-        assertEquals("This test verifies that the value is generated properly when there is no constraint for Date.","\""+dateFormat.format(date)+"\"",column.getValue(seed));
+        Assert.assertEquals("This test verifies that the value is generated properly when there is no constraint for Date.", "\"" + dateFormat.format(date) + "\"", column.getValue(seed));
 
     }
 }

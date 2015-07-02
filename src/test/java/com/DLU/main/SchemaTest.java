@@ -1,13 +1,16 @@
 package com.DLU.main;
 
+import com.DLU.main.*;
 import org.junit.Test;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class SchemaTest{
 
     @Test
-    public void testGetRowsToInsert() {
+    public void testGetRowsToInsert() throws SQLException {
 
 
         DataLoader dataLoader=new DataLoader();

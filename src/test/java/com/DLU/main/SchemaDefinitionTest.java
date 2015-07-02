@@ -1,17 +1,17 @@
 package com.DLU.main;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
-import static com.DLU.main.CustomAsserts.*;
 
 import org.junit.Test;
 
 public class SchemaDefinitionTest{
 
 
+
+
     @Test
-    public void testGetRowToInsert(){
+    public void testGetRowToInsert() throws SQLException {
 
 
         DataLoader dataLoader=new DataLoader();
@@ -19,17 +19,19 @@ public class SchemaDefinitionTest{
         SchemaDefinition schemaDefinition = dataLoader.generateSchemaDefinitionForCustomer();
         String query = schemaDefinition.getRowToInsert(999);
 
-        assertInsertQueryPattern(query);
+        String pattern = "insert into .* values(.*)";
+        CustomAsserts.assertQueryPattern(pattern,query);
     }
 
     @Test
     public void testsForPrimaryKeyConstraint(){
 
-        SchemaDefinition schemaDefinition = generateSchemaDefinitionForCustomer("customer","id","int",Constraints.primarykey);
+        SchemaDefinition schemaDefinition = generateSchemaDefinitionForCustomer("customer","id","int", Constraints.primarykey);
 
         String query=schemaDefinition.getRowToInsert(1);
 
-        assertInsertQueryPattern(query);
+        String pattern = "insert into .* values(.*)";
+        CustomAsserts.assertQueryPattern(pattern, query);
     }
 
 
@@ -40,8 +42,8 @@ public class SchemaDefinitionTest{
 
         String query=schemaDefinition.getRowToInsert(1);
 
-        assertInsertQueryPattern(query);
-
+        String pattern = "insert into .* values(.*)";
+        CustomAsserts.assertQueryPattern(pattern, query);
 
     }
 
@@ -53,8 +55,8 @@ public class SchemaDefinitionTest{
 
         String query=schemaDefinition.getRowToInsert(1);
 
-        assertInsertQueryPattern(query);
-
+        String pattern = "insert into .* values(.*)";
+        CustomAsserts.assertQueryPattern(pattern, query);
     }
 
     public SchemaDefinition generateSchemaDefinitionForCustomer(String name,String columnName,String columnType,Constraints constraint) {

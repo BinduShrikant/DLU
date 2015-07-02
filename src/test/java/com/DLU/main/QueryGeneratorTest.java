@@ -3,11 +3,14 @@ package com.DLU.main;
 
 
 //tests the QueryGenerator class
+import com.DLU.main.DataLoader;
+import com.DLU.main.QueryGenerator;
+import com.DLU.main.Schema;
+import com.DLU.main.SchemaDefinition;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 public class QueryGeneratorTest {
