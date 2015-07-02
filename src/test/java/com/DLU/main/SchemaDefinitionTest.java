@@ -5,14 +5,24 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 public class SchemaDefinitionTest{
 
+    @Test
+    public void testGetRowsToInsertWhenThereIsEmptySchemaDefinition() {
 
+        SchemaDefinition schemaDefinition=new SchemaDefinition("", new ArrayList<Column>(), new ArrayList<Constraint>());
+
+        String query = schemaDefinition.getRowToInsert(0);
+
+        assertEquals("This test checks if the number of query generated is correct",null,query);
+
+    }
 
 
     @Test
     public void testGetRowToInsert() throws SQLException {
-
 
         DataLoader dataLoader=new DataLoader();
 

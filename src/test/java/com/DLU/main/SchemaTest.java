@@ -1,6 +1,6 @@
 package com.DLU.main;
 
-import com.DLU.main.*;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -24,17 +24,21 @@ public class SchemaTest{
         assertEquals("This test checks if the number of query generated is correct",5,queryList.size());
 
     }
+
+
     @Test
-    public void testGetRowsToInsert1() {
+    public void testThatGetRowsToInsertWhenLoadIsNegative() throws SQLException{
 
 
+        int load = -21;
         DataLoader dataLoader=new DataLoader();
 
-        Schema schema=new Schema(new SchemaDefinition("", new ArrayList<Column>(), new ArrayList<Constraint>()));
+        SchemaDefinition schemaDefinition = dataLoader.generateSchemaDefinitionForCustomer();
 
-        ArrayList<String> queryList = schema.getRowsToInsert(5);
+        Schema schema=new Schema(schemaDefinition);
 
-        assertEquals("This test checks if the number of query generated is correct",5,queryList.size());
+        assertEquals(-1,schema.getRowsToInsert(load));
 
     }
+
 }

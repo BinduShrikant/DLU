@@ -21,8 +21,13 @@ public class SchemaDefinition {
 
     }
 
-
     public String getRowToInsert(int seed) {
+
+        if(tableName.isEmpty()||columns.isEmpty()){
+            System.out.println("Invalid schema");
+            return null;
+        }
+
         ArrayList columnValues = generateInsertQueryValues(seed);
 
         String columnNamesString = StringUtils.join(columnValues, ',');

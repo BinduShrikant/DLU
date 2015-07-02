@@ -13,21 +13,30 @@ public class Schema{
         schemaDefinition = schemadefinition;
     }
 
-    public ArrayList<String> getRowsToInsert(int numberOfRecordsToInsert) {
+    public <T> T getRowsToInsert(int numberOfRecordsToInsert) {
 
         String query;
         ArrayList<String> queryList = new ArrayList<String>();
 
-        while (numberOfRecordsToInsert > 0) {
+        if(numberOfRecordsToInsert<50001 && numberOfRecordsToInsert>0) {
 
-            query = schemaDefinition.getRowToInsert(queryList.size());
-            queryList.add(query);
+            while (numberOfRecordsToInsert > 0) {
 
-            numberOfRecordsToInsert = numberOfRecordsToInsert - 1;
+                query = schemaDefinition.getRowToInsert(queryList.size());
+                queryList.add(query);
+
+                numberOfRecordsToInsert = numberOfRecordsToInsert - 1;
+            }
+
+            return (T) new ArrayList<String>(queryList);
+    }
+    else {
+
+        System.out.println("Limit [0-50000]");
+
+        return (T) new Integer(-1);
 
         }
-
-        return queryList;
     }
 
 

@@ -27,35 +27,7 @@ public class DataLoaderTest {
     }
 
 
-    @Test
-    public void testThatADataLoaderDoesNotPopulatesTheDataVolumeWhenLoadCrossesLimit() throws SQLException{
 
-        DataLoader dataLoader = new DataLoader();
-        int load = 50001;
-
-        int countOfCurrentEntries = CustomAsserts.testEntries();
-
-        Assert.assertEquals(-1, dataLoader.populate(load));
-
-        Assert.assertEquals(countOfCurrentEntries, CustomAsserts.testEntries());
-
-    }
-
-
-    @Test
-    public void testThatADataLoaderDoesNotPopulatesTheDataVolumeWhenLoadIsNegative() throws SQLException{
-
-        DataLoader dataLoader = new DataLoader();
-        int load = -21;
-
-        int countOfCurrentEntries = CustomAsserts.testEntries();
-
-
-        Assert.assertEquals(-1, dataLoader.populate(load));
-
-        Assert.assertEquals(countOfCurrentEntries, CustomAsserts.testEntries());
-
-    }
 
     @Test
     public void testCleanDatabaseDeletesAllTheEntriesGeneratedByDLU() throws Exception {

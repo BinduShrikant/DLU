@@ -13,25 +13,14 @@ public class DataLoader {
 
         try {
 
-            if(numberOfRecordsToInsert<50001 && numberOfRecordsToInsert>0) {
+            SchemaDefinition schemaDefinition = generateSchemaDefinitionForCustomer();
 
-                SchemaDefinition schemaDefinition = generateSchemaDefinitionForCustomer();
+            Schema schema = new Schema(schemaDefinition);
 
-                Schema schema = new Schema(schemaDefinition);
+            ArrayList<String> insertQueries = queryGenerator.generateInsertQueries(schema);
 
-                ArrayList<String> insertQueries = queryGenerator.generateInsertQueries(schema);
+            database.executeBatchQuery(insertQueries);
 
-                database.executeBatchQuery(insertQueries);
-
-                return 0;
-            }
-            else {
-
-                System.out.println("Limit [0-50000]");
-
-                return -1;
-
-            }
         }
         catch (SQLException e) {
             e.printStackTrace();
