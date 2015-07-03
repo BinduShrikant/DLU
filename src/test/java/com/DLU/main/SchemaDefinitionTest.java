@@ -24,7 +24,7 @@ public class SchemaDefinitionTest{
     @Test
     public void testGetRowToInsert() throws SQLException {
 
-        DataLoader dataLoader=new DataLoader();
+        DataLoader dataLoader=new DataLoader("jdbc:h2:mem:cust;MODE=MYSQL", "org.h2.Driver", "root", "");
 
         SchemaDefinition schemaDefinition = dataLoader.generateSchemaDefinitionForCustomer();
         String query = schemaDefinition.getRowToInsert(999);

@@ -7,26 +7,32 @@ import java.util.ArrayList;
 public class Database {
 
     private String connectionString;
+    private String driver;
     private String username;
     private String password;
     private static Connection conn = null;
-    private static Database database = new Database();
 
-    private Database() {
-        connectionString = "jdbc:mysql://localhost:3306/cust?" + "&rewriteBatchedStatements=true";
-        username = "root";
-        password = "";
+    private Database(String connectionString, String driver, String username, String password) {
+        this.connectionString = connectionString;
+        this.driver = driver;
+        this.username = username;
+        this.password = password;
     }
 
 
-    public static Database getInstance() {
-        return database;
+    public static Database getInstance(String connectionString, String driver, String username, String password) {
+        return new Database(connectionString, driver, username, password);
     }
 
 
     public Connection getConnection() throws SQLException {
 
         if(conn == null) {
+            try {
+                Class.forName(driver);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             conn = DriverManager.getConnection(connectionString, username, password);
         }
 
@@ -41,12 +47,13 @@ public class Database {
         try {
             dbCon = getConnection();
             dbCon.setAutoCommit(false);
-            Statement batch=dbCon.createStatement();
+            Statement statement=dbCon.createStatement();
+
             for(String query:queryList){
-                batch.addBatch(query);
+                statement.addBatch(query);
             }
 
-            batch.executeBatch();
+            statement.executeBatch();
 
             dbCon.commit();
             System.out.println("Insertion Committed");

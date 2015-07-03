@@ -1,7 +1,5 @@
 package com.DLU.main;
 
-import com.DLU.main.Database;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -54,7 +52,7 @@ public class CustomAsserts {
         int record_count=0;
 
         ResultSet count_entries;
-        Database database = Database.getInstance();
+        Database database = Database.getInstance("jdbc:h2:mem:cust;MODE=MYSQL", "org.h2.Driver", "root", "");
         Connection dbCon = database.getConnection();
 
         Statement stmt = dbCon.createStatement();

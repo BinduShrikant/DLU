@@ -1,0 +1,9 @@
+com/DLU/main/QueryGeneratorTest.class
+com/DLU/main/DataLoaderTest.class
+com/DLU/main/SampleDataBuilder.class
+com/DLU/main/DatabaseTest.class
+com/DLU/main/SchemDefinitionBuilder.class
+com/DLU/main/CustomAsserts.class
+com/DLU/main/SchemaDefinitionTest.class
+com/DLU/main/SchemaTest.class
+com/DLU/main/ColumnTest.class

@@ -3,10 +3,7 @@ package com.DLU.main;
 
 
 //tests the QueryGenerator class
-import com.DLU.main.DataLoader;
-import com.DLU.main.QueryGenerator;
-import com.DLU.main.Schema;
-import com.DLU.main.SchemaDefinition;
+import org.junit.AfterClass;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -15,13 +12,19 @@ import java.util.ArrayList;
 
 public class QueryGeneratorTest {
 
-    @Test
+  @AfterClass
+  public static void tearDown() throws SQLException {
+    SampleDataBuilder.cleanup();
+  }
+
+  @Test
     public void testGenerateInsertQueries() throws SQLException {
 
       int numberOfRecordsToInsert = 1;
       QueryGenerator querygenerator = new QueryGenerator(numberOfRecordsToInsert);
 
-      DataLoader dataLoader=new DataLoader();
+      DataLoader dataLoader=new DataLoader("jdbc:h2:mem:cust;MODE=MYSQL", "org.h2.Driver", "root", "");
+      SampleDataBuilder.createCustomerTable();
 
       SchemaDefinition schemaDefinition = dataLoader.generateSchemaDefinitionForCustomer();
 

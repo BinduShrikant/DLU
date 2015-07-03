@@ -5,11 +5,15 @@ import java.util.ArrayList;
 
 //Populates the database
 public class DataLoader {
+    private final Database database;
+
+    public DataLoader(String connectionString, String driver, String username, String password){
+        database = Database.getInstance(connectionString, driver, username, password);
+    }
 
     public int populate(int numberOfRecordsToInsert) {
 
         QueryGenerator queryGenerator = new QueryGenerator(numberOfRecordsToInsert);
-        Database database = Database.getInstance();
 
         try {
 
@@ -18,6 +22,8 @@ public class DataLoader {
             Schema schema = new Schema(schemaDefinition);
 
             ArrayList<String> insertQueries = queryGenerator.generateInsertQueries(schema);
+
+            //System.out.println(insertQueries);
 
             database.executeBatchQuery(insertQueries);
 
@@ -29,8 +35,6 @@ public class DataLoader {
     }
 
     public void cleanDatabase(int numberOfRecordsToInsert) throws SQLException{
-
-        Database database = Database.getInstance();
         Connection dbCon=database.getConnection();
         Statement stmt=dbCon.createStatement();
         String query=String.format("delete from %s where 0<id<%s;","customer",numberOfRecordsToInsert);
