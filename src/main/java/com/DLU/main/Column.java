@@ -45,4 +45,8 @@ public class Column {
 
     }
 
+    public String getColumnName(){
+        return ColumnName;
+    }
+
 }

@@ -23,6 +23,7 @@ public class SampleDataBuilder {
         }
     }
 
+
     public static void createCustomerTable() throws SQLException {
         createCustomerTable(getDatabase());
     }

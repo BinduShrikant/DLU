@@ -3,9 +3,6 @@ package com.DLU.main;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by bindugo on 02/07/15.
- */
 public class SchemDefinitionBuilder {
     private String schemaName;
     private ArrayList<Column> columns = new ArrayList<Column>();
@@ -25,12 +22,25 @@ public class SchemDefinitionBuilder {
         return this;
     }
 
-    public SchemDefinitionBuilder WithConstraint(Constraints constraint, ArrayList<String> columnWithConstraint) {
-        constraints.add(new Constraint(constraint, getColumnsFor(columnWithConstraint)));
+    public SchemDefinitionBuilder WithConstraint(Constraints constraint, ArrayList<String> columnsWithConstraint) {
+        constraints.add(new Constraint(constraint, getColumns(columnsWithConstraint)));
         return this;
     }
 
-    private ArrayList<Column> getColumnsFor(ArrayList<String> columnWithConstraint) {
-        return null;
+    private ArrayList<Column> getColumns(ArrayList<String> columnsWithConstraintNames) {
+
+        ArrayList<Column> columnsWithConstraint = new ArrayList<Column>();
+
+        for(Column column:columns)
+        {
+            if(columnsWithConstraintNames.contains(column.getColumnName()) == true){
+
+                columnsWithConstraint.add(column);
+
+            }
+        }
+
+        return columnsWithConstraint;
     }
+
 }

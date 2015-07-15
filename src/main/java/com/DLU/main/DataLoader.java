@@ -11,7 +11,7 @@ public class DataLoader {
         database = Database.getInstance(connectionString, driver, username, password);
     }
 
-    public int populate(int numberOfRecordsToInsert) {
+    public int populate(int numberOfRecordsToInsert) throws Exception {
 
         QueryGenerator queryGenerator = new QueryGenerator(numberOfRecordsToInsert);
 
@@ -29,7 +29,7 @@ public class DataLoader {
 
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            throw new Exception("Unable to insert data");
         }
         return numberOfRecordsToInsert;
     }

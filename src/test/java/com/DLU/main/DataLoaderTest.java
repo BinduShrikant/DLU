@@ -29,7 +29,7 @@ public class DataLoaderTest {
     }
 
     @Test
-    public void testThatADataLoaderPopulatesTheRequestedDataVolume() throws SQLException{
+    public void testThatADataLoaderPopulatesTheRequestedDataVolume() throws Exception {
 
         int load = 10;
 

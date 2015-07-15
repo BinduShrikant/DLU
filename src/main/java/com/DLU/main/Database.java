@@ -59,12 +59,11 @@ public class Database {
             System.out.println("Insertion Committed");
 
         } catch (SQLException e) {
-
-            e.printStackTrace();
             if (dbCon != null) {
                 dbCon.rollback();
 
             }
+            throw e;
 
         }
     }

@@ -1,5 +1,7 @@
 package com.DLU.main;
 
+import org.h2.jdbc.JdbcBatchUpdateException;
+import org.h2.jdbc.JdbcSQLException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -44,7 +46,7 @@ public class DatabaseTest {
     }
 
 
-    @Test
+    @Test(expected = SQLException.class)
     public void testExecuteBatchQueryDoesNotInsertAnyRecordsWhenThereIsAFailure() throws Exception {
 
         queryList.add("insert into customer values(333,333,'bindu3','bindu3@.com','2015-2-2')");

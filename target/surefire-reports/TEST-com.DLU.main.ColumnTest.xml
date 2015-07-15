@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.097" errors="0" skipped="0" tests="6" name="com.DLU.main.ColumnTest">
+<testsuite failures="0" time="0.063" errors="0" skipped="0" tests="6" name="com.DLU.main.ColumnTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Libraries"/>
@@ -22,7 +22,7 @@
     <property name="basedir" value="/Users/saxenas/IdeaProjects/DLU"/>
     <property name="java.endorsed.dirs" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/lib/endorsed"/>
     <property name="os.arch" value="x86_64"/>
-    <property name="surefire.real.class.path" value="/var/folders/4c/1j62m8b91ls6s29n3m1_mfbh0000gp/T/surefirebooter6107134421201362173.jar"/>
+    <property name="surefire.real.class.path" value="/var/folders/4c/1j62m8b91ls6s29n3m1_mfbh0000gp/T/surefirebooter5111554821199072393.jar"/>
     <property name="java.io.tmpdir" value="/var/folders/4c/1j62m8b91ls6s29n3m1_mfbh0000gp/T/"/>
     <property name="line.separator" value="
 "/>
@@ -46,7 +46,7 @@
     <property name="java.vm.specification.version" value="1.0"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home"/>
-    <property name="sun.java.command" value="/var/folders/4c/1j62m8b91ls6s29n3m1_mfbh0000gp/T/surefirebooter6107134421201362173.jar /var/folders/4c/1j62m8b91ls6s29n3m1_mfbh0000gp/T/surefire8126679502757874813tmp /var/folders/4c/1j62m8b91ls6s29n3m1_mfbh0000gp/T/surefire8714548807856890975tmp"/>
+    <property name="sun.java.command" value="/var/folders/4c/1j62m8b91ls6s29n3m1_mfbh0000gp/T/surefirebooter5111554821199072393.jar /var/folders/4c/1j62m8b91ls6s29n3m1_mfbh0000gp/T/surefire5394336233305615968tmp /var/folders/4c/1j62m8b91ls6s29n3m1_mfbh0000gp/T/surefire8321766072447578345tmp"/>
     <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="apple.awt.CToolkit"/>
@@ -65,10 +65,10 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.043" classname="com.DLU.main.ColumnTest" name="testsTheGetValueWithoutTheConstraintReturnsTheAppropriateValueForAnInteger"/>
-  <testcase time="0.001" classname="com.DLU.main.ColumnTest" name="testsTheGetValueWithTheConstraintReturnsTheAppropriateValueForAnInteger"/>
+  <testcase time="0.018" classname="com.DLU.main.ColumnTest" name="testsTheGetValueWithoutTheConstraintReturnsTheAppropriateValueForAnInteger"/>
+  <testcase time="0" classname="com.DLU.main.ColumnTest" name="testsTheGetValueWithTheConstraintReturnsTheAppropriateValueForAnInteger"/>
   <testcase time="0" classname="com.DLU.main.ColumnTest" name="testsTheGetValueWithTheConstraintReturnsTheAppropriateValueForADate"/>
   <testcase time="0" classname="com.DLU.main.ColumnTest" name="testsTheGetValueWithoutTheConstraintReturnsTheAppropriateValueForAString"/>
-  <testcase time="0" classname="com.DLU.main.ColumnTest" name="testsTheGetValueWithoutTheConstraintReturnsTheAppropriateValueForADate"/>
+  <testcase time="0.001" classname="com.DLU.main.ColumnTest" name="testsTheGetValueWithoutTheConstraintReturnsTheAppropriateValueForADate"/>
   <testcase time="0.001" classname="com.DLU.main.ColumnTest" name="testsTheGetValueWithTheConstraintReturnsTheAppropriateValueForAString"/>
 </testsuite>
